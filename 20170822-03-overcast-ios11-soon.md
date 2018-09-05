@@ -1,4 +1,4 @@
-OVERCAST-IOS11-SOON
+Overcast for iOS 11 will be late
 ====================
 Type: link
 Link: https://marco.org/2017/09/22/overcast-ios11-soon
