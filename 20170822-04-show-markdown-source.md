@@ -10,23 +10,30 @@ Publish-now
 
 Fitur **Show Markdown** berlaku dan hanya berlaku untuk halaman _permalink_, yaitu halaman blog yang menampilkan postingan tunggal, jadi bukan pada halaman beranda (_frontpage_) atau halaman arsip. Dalam Overcrack halaman _permalink_ dicirikan dengan format URL (yaitu alamat yang tertulis di baris alamat atau _address bar_) yang memuat secara berurutan tahun, bulan, tanggal dan judul postingan, misalnya seperti ini: `/2017/02/28/judul-artikel`.
 
-Untuk memanggil fitur **Show Markdown** silakan tambahkan **`/markdown`** setelah alamat yang tercetak di _address bar_. Lebih mudah lagi, template _default_ Overcrack menyediakan _shortcut_ **`Ctrl-M`** untuk memanggil fitur ini. 
+Memanggil fitur **Show Markdown** dilakukan dengan cara menambahkan **`/markdown`** di belakan alamat yang tercetak di _address bar_. Sebagai contoh bila _address bar_ menampilkan alamat:
 
-Nah, untuk artikel yang sedang Anda baca ini, bila yang tercetak di _address bar_ browser adalah `[nama.domain]/2017/08/22/show-markdown-source` berarti Anda sedang mengunjungi halaman _permalink_. Bila tidak, klik [link&nbsp;ini](/2017/08/22/show-markdown-source) untuk memastikan Anda sudah berada di halaman _permalink_, atau klik [link&nbsp;ini](/2017/08/22/show-markdown-source/markdown) untuk melihat langsung versi Markdownnya.
+	http://overcrack.web.id/2017/08/22/show-markdown-source
 
-
-###How it works
-
-Fitur **Show Markdown** terinspirasi oleh halaman [Proyek Markdown](https://daringfireball.net/projects/markdown/) di situs Daring Fireball yang bisa menampilkan kode sumber dengan menambahkan sufiks `/index.text`. Tetapi bila [John Gruber](https://twitter.com/gruber/) hanya mengijinkan melihat kode sumber Markdown hanya pada _satu_ halaman saja, **Show Markdown** di Overcrack diaplikasikan untuk _seluruh_ halaman _permalink_. Dan terus terang saya menganggap implementasi di Overcrack lebih elegan. :-) Lalu, _how it works_?
-
-Berbeda dengan CMS rumit seperti Wordpress dan lain-lain yang menyimpan konten asli dalam sejumlah tabel database yang _tidak bisa_ begitu saja dibaca oleh mata manusia, Overcrack menyimpan konten aslinya dalam file teks sederhana – ya, tentu dengan format penulisan Markdown. 
+maka, **Show Markdown** diaktifkan dengan mengubah URL menjadi:
 
 
+	http://overcrack.web.id/2017/08/22/show-markdown-source/markdown
 
-Seluruh halaman HTML blog Overcrack 
-
-Berbeda dengan hal yang pertama, Overcrack akan memanggil calon korban dengan sendirinya.
+Mudah. Dan lebih mudah lagi karena template _default_ Overcrack menyediakan _shortcut_ **`Ctrl-M`** untuk memanggil fitur ini. 
 
 
-Selain bisa dibuka dan mudah dibaca dengan aplikasi paling sederhana seperti Notepad di Windows atau TextEdit di Mac (bahkan di konsol terminal), seluruh konten Overcrack bersifat portabel.
+### How it works
 
+Fitur **Show Markdown** terinspirasi oleh halaman [Proyek Markdown](https://daringfireball.net/projects/markdown/) di situs Daring Fireball yang bisa menampilkan kode sumber dengan menambahkan sufiks `/index.text`. Tetapi bila [John Gruber](https://twitter.com/gruber/) hanya mengijinkan melihat kode sumber Markdown hanya pada _satu_ halaman itu saja, Overcrack mengimplementasikan secara menyeluruh untuk _setiap_ halaman _permalink_. Lalu, _how it works_?
+
+Berbeda dengan CMS rumit seperti Wordpress dan lain-lain yang menyimpan konten asli dalam sejumlah tabel database yang _tidak bisa_ begitu saja dibaca oleh mata manusia, Overcrack menyimpan konten aslinya dalam file teks sederhana. Bisa dibuka, dibaca dan dipahami sekalipun hanya dengan Notepad di Windows atau TextEdit di Mac.
+
+**Show-Markdown** mengandalkan pengaturan akses direktori yang disediakan oleh server web Apache melalui file `.htaccess` di folder `web root`. Berikut adalah potongan file `.htaccess` yang mengatur itu:
+
+	# RewriteCond for serving Markdown resource
+	RewriteCond %{REQUEST_URI} /([0-9]{4})/([0-9]{2})/([0-9]{2})/(.*)/markdown$
+	RewriteRule .* show-markdown.php
+
+Dalam Bahasa Indonesia kode tersebut kurang lebih bermakna "Bila pengguna meminta _path_ dengan pola `/yyyy/mm/dd/judul-artikel/markdown` maka serahkan urusan itu pada skrip `show-markdown.php`." Skrip inilah yang kemudian bertanggung jawab menemukan kode sumber artikel dan kemudian menyajikannya ke browser.
+
+Simpel dan elegan.

@@ -2,10 +2,11 @@ Sepuluh tahun iPhone
 ====================
 Type: link
 Link: https://marco.org/2017/01/09/ten-years-of-iphone
-Image: -----
+Image: 
 Description: Marco Arment after ten years of iPhone.
 Published: 2017-01-12 09:00am
 Publish-now
+
 
 Ulang tahun kesepuluh iPhone menghadirkan banyak memori. Dan berikut catatan yang dibuat Marco Arment (cetak tebal dari saya):
 
